@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo
+echo ---------------------------------------------
+echo "You are logged in as $USER@$HOSTNAME"
+echo "It is $(date +"%B %d (%a), %Y")"
+echo "You are now $(age) years old!"
+
+if [[ "$(date +"%m %d")" == "08 28" ]]; then
+    echo "Happy birthday!"
+fi
+
+echo "Welcome home!" 
+echo ---------------------------------------------
+echo

@@ -1,0 +1,109 @@
+configuration {
+
+	font: "Consolas 16";
+	line-margin: 5;
+	lines: 6;
+	columns: 2;
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    show-icons:     true;
+}
+
+@import "colors/colors.rasi"
+
+* {
+	border-color: @border;
+	background-color: @transp;
+	text-color: @foreground;
+	foreground-color: @foreground;
+}
+
+window {
+    location: CENTER;
+    anchor: CENTER;
+    transparency: "screenshot";
+    padding: 40px;
+    border:  3px;
+	background-color: @background;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+	width: 50%;
+	height: 45%;
+}
+
+mainbox {
+    spacing: 1%;
+	padding: 0;
+    children: [ inputbar, message, listview ];
+    background-color: @transp;
+}
+
+message {
+    color: @foreground;
+    padding: 2px;
+    border-color: @border-alt;
+    border:  1px;
+    background-color: @background;
+}
+
+inputbar {
+    color: @foreground;
+    padding: 11px;
+    background-color: @background;
+
+    border: 1px;
+    border-radius: 0;
+    border-color: @border;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color:inherit;
+}
+
+prompt {
+    margin: 0px 0px 2px 0px;
+	background-color: @transp;
+}
+
+listview {
+    padding: 0px;
+    border-radius: 0;
+    border-color: @border;
+    border: 1px;
+    background-color: @background;
+    dynamic: false;
+	scrollbar: false;
+}
+
+element {
+    padding: 8px 2px;
+	border-color: @border-alt;
+	border: 0px;
+    vertical-align: 0.5;
+    border-radius: 0;
+    background-color: @transp;
+    text-color: @foreground;
+}
+
+element normal.normal {
+    background-color: @transp;
+}
+
+element alternate.normal {
+    background-color: @border-alt;
+}
+
+element selected.normal {
+	background-color: @selected;
+	text-color: @foreground;
+}
+
+element-text, element-icon {
+    background-color: @transp;
+    text-color:       inherit;
+}

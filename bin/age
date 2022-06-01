@@ -1,0 +1,7 @@
+#!/bin/bash
+
+born="999016200"
+sec=$(( $(date +%s) - $born ))
+avgYr="31557600"
+
+echo "$(echo "scale=3; $sec / $avgYr" | bc -l | cut -c "1-10")"

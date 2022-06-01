@@ -1,0 +1,32 @@
+#!/bin/bash
+# vim: set sts=4 sw=4 et tw=0 :
+#
+# License: BSD
+
+: ${XWININFO:=$(type -P xwininfo)}
+[[ -z ${XWININFO} ]] && { echo "You need to install xwininfo"; exit 1; }
+: ${XPROP:=$(type -P xprop)}
+[[ -z ${XPROP} ]] && { echo "You need to install xprop"; exit 1; }
+
+TRANSPARENCY_PERCENT=$1
+[[ -z ${TRANSPARENCY_PERCENT} ]] && { echo "Usage: $0 <transparency in percentage> [all]"; exit 1; }
+
+if [[ "$2" != "all" ]]; then
+    TERMINAL_WINDOW_XID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+else
+    # This is very fragile
+    TERMINAL_WINDOW_XID=$("$XWININFO" -root -tree | grep -v "Terminal" | sed -n 's/^[[:space:]]\+\([0-9a-fx]\+\).*gnome-terminal.*/\1/p') $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+fi
+
+if [[ ${TRANSPARENCY_PERCENT} = 0 ]]; then
+    TRANSPARENCY_HEX="0xffffffff"
+elif [[ ${TRANSPARENCY_PERCENT} = 100 ]]; then
+    TRANSPARENCY_HEX="0x00000000"
+else
+    TRANSPARENCY_HEX=$(printf "0x%x" $((4294967295 - 4294967295 * $TRANSPARENCY_PERCENT / 100)))
+fi
+
+echo "Setting transparency to $TRANSPARENCY_HEX (${TRANSPARENCY_PERCENT}%)"
+for each in $TERMINAL_WINDOW_XID; do
+    "$XPROP" -id $each -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY $TRANSPARENCY_HEX
+done

@@ -1,0 +1,104 @@
+configuration {
+  icon-theme:           "Vimix-Doder-dark";
+  font:                 "Consolas 12";
+  hide-scrollbar:       true;
+}
+
+window {
+  transparency:         "real";
+  background-color:     @background;
+  text-color:           @foreground;
+  border-color:         @border;
+  border:               3;
+}
+
+
+prompt {
+	background-color: 		@transp;
+	text-color: 			@background;
+    	border-color:       @border-alt;
+    padding:    0.5% 1%;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    background-color:   @foreground;
+    text-color: @background;
+    padding:    0.5% 1%;
+}
+
+entry {
+  background-color:     @transp;
+  text-color:           @foreground;
+  placeholder-color:    @foreground;
+  blink:                true;
+  border-color:         @border-alt;
+  padding:              0.5% 0%;
+}
+
+inputbar {
+  background-color:     @background-alt;
+  text-color:           @foreground;
+  border-color:			@border-alt;
+  border:               1;
+}
+
+listview {
+  background-color:     @transp;
+}
+
+mainbox {
+  background-color:     @transp;
+  border-color:			@transp;
+}
+
+element {
+  background-color:     @background-alt;
+  text-color:           @foreground;
+  border-color:         @border-alt;
+  border:               1;
+}
+
+element-icon {
+  size:                 64px;
+  border:               0px;
+  background-color:     @transp;
+  horizontal-align:     0.5;
+}
+
+element-text {
+  text-color:           @foreground;
+  background-color:     @transp;
+  padding:              0;
+  border:               0;
+}
+
+element normal.urgent,
+element alternate.urgent {
+  background-color:     @urgent;
+  text-color:           @foreground;
+}
+
+element normal.active,
+element alternate.active {
+  background-color:     @background-alt;
+  text-color:           @foreground;
+}
+
+element selected {
+  background-color:     @selected;
+  text-color:           @foreground;
+  border-color:         @selected;
+}
+
+element selected.urgent {
+    background-color:               @urgent;
+    text-color:                     @foreground;
+}
+
+element selected.active {
+    background-color:               @background-alt;
+    color:                          @foreground;
+}
+
+@import "colors/colors.rasi"

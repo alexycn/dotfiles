@@ -1,0 +1,25 @@
+#!/bin/bash
+
+vol=$(pamixer --get-volume)
+mute=$(pamixer --get-mute)
+postfix=""
+
+if [[ $1 == "-i" || $1 == "--icon" || $2 == "-i" || $2 == "--icon" ]]; then
+    if [[ $vol -le 33 ]]; then
+        prefix=" "
+    elif [[ $vol -le 66 ]]; then
+        prefix=" "
+    else
+        prefix=" "
+    fi
+
+    if [[ $mute == "true" ]]; then
+        prefix=" "
+    fi
+fi
+
+if [[ $mute == "true" && ( $1 == "-v" || $1 == "--verbose" || $2 == "-v" || $2 == "--verbose" ) ]]; then
+    postfix=" (MUT)"
+fi
+
+echo -n "$prefix$vol$postfix"

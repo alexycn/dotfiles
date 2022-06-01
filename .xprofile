@@ -1,0 +1,30 @@
+export PATH="${PATH}:/home/alexycn/bin"
+
+# Config screen suspend
+xset dpms 0 600 1800
+
+DIR="$HOME"/bin
+
+# betterlockscreen -u "/home/alexycn/Pictures/bg/bg.jpg" --fx blur &
+xss-lock betterlockscreen -- --lock blur &
+
+"$DIR"/inputConfig.sh
+
+# Screen config
+"$DIR"/initDPI.sh
+autorandr -c
+
+# Input methods
+fcitx &
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
+# Clipboard synchronization via autocutsel
+autocutsel &
+
+bluetoothctl power off
+
+export TERMINAL=/usr/bin/kitty
+export VISUAL=/usr/bin/code
+export EDITOR=/usr/bin/nano

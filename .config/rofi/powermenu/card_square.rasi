@@ -1,0 +1,89 @@
+/*
+ *
+ * Author  : Aditya Shakya
+ * Mail    : adi1090x@gmail.com
+ * Github  : @adi1090x
+ * Twitter : @adi1090x
+ *
+ */
+
+configuration {
+    show-icons:                     false;
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	sidebar-mode: 					false;
+}
+
+@import "../univ_config.rasi"
+
+window {
+    border-radius:                  0px;
+    height:                         27.1%;
+    width:                          50%;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 						true;
+    padding:                        0.5% 0.5% 0.5% 0.5%;
+    border-color:                   @border-alt;
+    background-color:               @transp;
+    text-color:                     @foreground;
+}
+
+textbox-prompt-colon {
+	expand: 						false;
+	str: 							"System";
+    padding:                        0.5% 0.5% 0.5% 0.5%;
+}
+
+inputbar {
+	children: 						[ textbox-prompt-colon, prompt ];
+    expand:                         false;
+    border:                  		1;
+    margin:                         0% 21.3% 0% 0%;
+    padding:                        0;
+    position:                       center;
+}
+
+listview {
+    margin:                         0% 0% 0% 0%;
+    spacing:                        2%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         horizontal;
+    background-color:               @transp;
+}
+
+mainbox {
+    children:                       [ inputbar, listview ];
+    spacing:                        3.5%;
+    padding:                        4% 0% 0% 2%;
+}
+
+element {
+    orientation:                    horizontal;
+    border-radius:                  0%;
+}
+
+element-text {
+	font:							"Material Icons Outlined 32";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         4% 2.7% 4% 2.7%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    border-radius:                  0.2%;
+}
+
+element selected {
+    border:                  		0% 0% 0% 0%;
+    border-radius:                  0%;
+}
+

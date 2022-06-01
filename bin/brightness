@@ -1,0 +1,25 @@
+#!/bin/bash
+
+bright=$(brightnessctl | grep -e '%' | cut -d'(' -f2 | cut -d')' -f1)
+
+perc=$(echo $bright | cut -d'%' -f1)
+
+if [[ "$1" == "-i" || "$1" == "--icon" ]]; then
+    if (( $perc < 15 )); then
+        icon=" "
+    elif (( $perc < 30 )); then
+        icon=" "
+    elif (( $perc < 45 )); then
+        icon=" "
+    elif (( $perc < 60 )); then
+        icon=" "
+    elif (( $perc < 75 )); then
+        icon=" "
+    elif (( $perc < 90 )); then
+        icon=" "
+    else
+        icon=" "
+    fi
+fi
+
+echo -n "$icon$perc"

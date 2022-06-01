@@ -1,0 +1,53 @@
+#!/bin/bash
+# Background script that handles user inactivity
+# Requires https://github.com/g0hl1n/xprintidle
+# Does not alter hardware states, as those are managed by DPMS
+
+ubin="/home/alexycn/bin"
+
+# Threshold settings
+# t0 for when to screen dim, and t1 for when to lock
+t0=480000
+t1=900000
+
+# State variables
+idle="false"
+lastBr=""
+
+while [[ true ]]; do
+    # Keep track of the current brightness if we aren't idle
+    if [[ $idle == "false" ]]; then
+        lastBr="$($ubin/brightness)"
+    fi
+
+    # Timer
+    timer=$(xprintidle)
+
+    # Resume from idle
+    if [[ $timer -lt $t0 ]]; then
+        # Detect change from idle to non-idle and correct brightness to original (non-dim) value
+        if [[ $idle == "true" && $lastBr != $($ubin/brightness) ]]; then
+            $ubin/bright-ctl.sh $lastBr
+        fi
+        # Update state here. The order is important
+        idle="false"
+
+    # Screen dim when timer is reached
+    elif [[ $timer -ge $t0 ]]; then
+        if [[ $($ubin/brightness) != 1 ]]; then
+                # Remember original brightness value
+                lastBr=$($ubin/brightness)
+                $ubin/bright-ctl.sh 1
+        fi
+        idle="true"
+    fi
+
+    if [[ $idle == "true" && $(playerctl status 2> /dev/null) != "Playing" ]]; then
+        # Screen lock
+        if [[ $timer -ge $t1 ]]; then
+            loginctl lock-session
+        fi
+    fi
+    # Keep system load down
+    sleep 1
+done
